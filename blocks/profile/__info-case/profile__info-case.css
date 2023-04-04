@@ -1,0 +1,10 @@
+.profile__info-case{
+  margin-top: 21px;
+  display: flex;
+}
+
+@media screen and (max-width: 787px) {
+  .profile__info-case{
+    margin: 0;
+  }
+}

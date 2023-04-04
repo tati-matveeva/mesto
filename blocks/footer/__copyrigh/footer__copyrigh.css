@@ -1,0 +1,13 @@
+.footer__copyrigh{
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.78px;
+  color: #545454;
+}
+
+@media screen and (max-width: 787px){
+  .footer__copyrigh{
+    font-size: 14px;
+    line-height: 16.94px;
+  }
+}

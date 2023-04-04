@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="pages/index.css">
+</head>
+
+
+<body class="page">
+   <header class="header">
+    <img class="header__logo" alt="Логотип Место" src="../image/logo-1.svg">
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="profile">
+      <img src="../image/image-1.jpg" alt="Аватар Жак-Ива Кусто" class="profile__avatar">
+      <div class="profile__info">
+        <div class="profile__info-case">
+          <h1 class="profile__title">Жак-Ив Кусто</h1>
+          <button class="profile__edit-button"></button>
+        </div>
+        <p class="profile__subtitle">Исследователь океана</p>
+      </div>
+      <button class="profile__add-button" type="button"></button>
+    </section>
+
+    <section class="elements">
+      <div class="elements__element">
+        <img src="./image/Karachaevsk.png" alt="фото Карачаевск" class="elements__image">
+        <div class="elements__element-case">
+          <h2 class="elements__name">Карачаевск</h2>
+          <button class="elements__button"></button>
+        </div>
+      </div>
+      <div class="elements__element">
+        <img src="./image/Elbrus.png" alt="фото Эльбрус" class="elements__image">
+        <div class="elements__element-case">
+          <h2 class="elements__name">Гора Эльбрус</h2>
+          <button class="elements__button"></button>
+        </div>
+      </div>
+      <div class="elements__element">
+        <img src="./image/Dombay.png" alt="фото Домбай" class="elements__image">
+        <div class="elements__element-case">
+          <h2 class="elements__name">Домбай</h2>
+          <button class="elements__button"></button>
+        </div>
+      </div>
+      <div class="elements__element">
+        <img src="./image/baikal lake.jpeg" alt="Байкал" class="elements__image">
+        <div class="elements__element-case">
+          <h2 class="elements__name">Байкал</h2>
+          <button class="elements__button"></button>
+        </div>
+      </div>
+      <div class="elements__element">
+        <img src="./image/respublica altai.jpeg" alt="Республика Алтай" class="elements__image">
+        <div class="elements__element-case">
+          <h2 class="elements__name">Республика Алтай</h2>
+          <button class="elements__button"></button>
+        </div>
+      </div>
+      <div class="elements__element">
+        <img src="./image/murmansk oblact.jpeg" alt="Мурманская область" class="elements__image">
+        <div class="elements__element-case">
+          <h2 class="elements__name">Мурманская область</h2>
+          <button class="elements__button"></button>
+        </div>
+      </div>
+    </section>  
+  </main>
+  <section class="popup">
+    <div class="popup__box">
+      <button class="popup__button-close" type="button"></button>
+      <form class="popup__form" name="form">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__input popup__input_type-name"type="text">
+        <input class="popup__input popup__input_type-occupation"type="text">
+       <button class="popup__button-submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <footer class="footer">
+    <p class="footer__copyrigh">&copy;2023. Mesto Russia</p>
+  </footer>
+  <script src="./scripts/index.js"></script>
+</body>
+</html>
