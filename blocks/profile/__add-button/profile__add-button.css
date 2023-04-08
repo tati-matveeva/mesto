@@ -8,12 +8,12 @@
   background-position: center;
   border: 1px solid white;
   cursor: pointer;
-  margin: 35px 0 auto auto;
+  margin: 37px 0 auto auto;
 }
 
 .profile__add-button:hover{
-  opacity: .6;
-  transition: opacity 0.5s linear;
+  opacity: .5;
+  transition: opacity .3s ease-in-out;
 }
 
 @media screen and (max-width: 1024px){
