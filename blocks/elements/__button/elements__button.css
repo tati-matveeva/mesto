@@ -1,9 +1,8 @@
 .elements__button{
-  width: 30px;
-  height: 20px;
+  width: 22px;
+  height: 19px;
   background-color: white;
   background-image: url(../../../image/Like-1.svg);
-  background-size: 22px, 22px;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;

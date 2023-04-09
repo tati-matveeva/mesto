@@ -7,7 +7,7 @@ const inputName = profileElement.querySelector('.profile__title');
 const inputJob = profileElement.querySelector('.profile__subtitle');
 let inputNameNew = popupElement.querySelector('.popup__input_type_name');
 let inputJobNew = popupElement.querySelector('.popup__input_type_occupation');
-
+const formButtomSubmit = popupElement.querySelector('.popup__button-submit');
 //открыли
 function openPopup () {
   inputNameNew.value = inputName.textContent;
