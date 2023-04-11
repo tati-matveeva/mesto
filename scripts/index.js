@@ -7,7 +7,8 @@ const inputName = profileElement.querySelector('.profile__title');
 const inputJob = profileElement.querySelector('.profile__subtitle');
 let inputNameNew = popupElement.querySelector('.popup__input_type_name');
 let inputJobNew = popupElement.querySelector('.popup__input_type_occupation');
-const formButtomSubmit = popupElement.querySelector('.popup__button-submit');
+const form = popupElement.querySelector('.popup__form');
+
 //открыли
 function openPopup () {
   inputNameNew.value = inputName.textContent;
@@ -24,11 +25,11 @@ popupCloseButtonElement.addEventListener('click', closePopup);
 
 //сохранение и новые данные
 
-function popupSubmitButtonElement (evt) {
+function popupSubmitButtonElement(evt) {
   evt.preventDefault();
   inputName.textContent = inputNameNew.value;
   inputJob.textContent = inputJobNew.value;
-  closePopup ();
+  closePopup();
 };
 
-formButtomSubmit.addEventListener('click', popupSubmitButtonElement);
+form.addEventListener('submit', popupSubmitButtonElement);
