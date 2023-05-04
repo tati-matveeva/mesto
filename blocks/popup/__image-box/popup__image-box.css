@@ -1,0 +1,9 @@
+.popup__image-box{
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin: auto;
+  padding: 0;
+}
