@@ -1,0 +1,7 @@
+.popup__input-cover{
+  display: flex;
+  flex-direction: column;
+  min-height: 63px;
+  margin-bottom: 5px;
+}
+  
