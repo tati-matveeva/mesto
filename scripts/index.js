@@ -5,7 +5,7 @@ import FormValidator from './FormValidator.js';
 //переменные
 const popupElements = document.querySelector('.popup');
 
-const popupCloseButtonElement = document.querySelectorAll('.popup__button-close');
+const popupCloseButtonElements = document.querySelectorAll('.popup__button-close');
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
 const profileAddButtonElement = document.querySelector('.profile__add-button');
 const inputName = document.querySelector('.profile__title');
@@ -60,7 +60,7 @@ function closePopup(popup){
 }
 
 //закрытие на крестик
-popupCloseButtonElement.forEach((element) => {
+popupCloseButtonElements.forEach((element) => {
   const popup = element.closest('.popup');
   element.addEventListener('click', () => {
     closePopup(popup);
@@ -76,23 +76,16 @@ function closePopupEscape(evt){
 }
 
 //закрытие по оверлею
-function closePopupOverlay(evt){
-  if (evt.target === evt.currentTarget){
-    closePopup(evt.target);
+const popups = document.querySelectorAll('.popup'); //Ищем все попапы
+popups.forEach((popup) => {
+ popup.addEventListener('click', (evt) => {
+  //Благодаря всплытию при клике на крестик мы поймаем событие на элементе попапа.
+  //Проверяем что кликнули на оверлей или на крестик.
+  if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__close-button')){
+   closePopup(popup);
   }
-};
-
-popupProfileElement.addEventListener('click', (evt) => {
-  closePopupOverlay(evt);
-})
-
-popupAddElement.addEventListener('click', (evt) => {
-  closePopupOverlay(evt);
-})
-
-imagePopupElement.addEventListener('click', (evt) => {
-  closePopupOverlay(evt);
-})
+ });
+}); 
 
 //Добавление новых данных в профиль и сохранение 
 formProfileElement.addEventListener('submit', (evt) => {
@@ -138,9 +131,9 @@ initialCards.forEach(element => {
 formAddElement.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const objectNewCardInfo = {name: inputTitle.value, link: inputLink.value};
-  const card = createCard(objectNewCardInfo);
+  const card = newCard(objectNewCardInfo);
   addNewCard(elementsElement, card);
-  closePopup(imagePopupElement);
+  closePopup(imageAddElement);
 });
 
 //FormValidator для formProfileElement и запуск валидации
