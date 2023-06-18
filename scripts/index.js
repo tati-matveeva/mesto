@@ -133,7 +133,7 @@ formAddElement.addEventListener('submit', (evt) => {
   const objectNewCardInfo = {name: inputTitle.value, link: inputLink.value};
   const card = newCard(objectNewCardInfo);
   addNewCard(elementsElement, card);
-  closePopup(imageAddElement);
+  closePopup(popupAddElement);
 });
 
 //FormValidator для formProfileElement и запуск валидации
