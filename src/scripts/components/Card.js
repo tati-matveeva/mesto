@@ -2,7 +2,7 @@ class Card {
   constructor(cardData, cardTemplate, openCardPopup){
     this._cardData = cardData;
     this._link = cardData.link;
-    this._name = cardData.name;
+    this._name = cardData.title;
     this._cardTemplate = cardTemplate;
     this._openCardPopup = openCardPopup;
   }
@@ -36,7 +36,7 @@ class Card {
     this._likeElement = this._cloneElement.querySelector('.elements__like-button');
     this._nameElement = this._cloneElement.querySelector('.elements__name');
     this._imageElement.src = this._link;
-    this._imageElement.alt = this._name;
+    this._imageElement.alt = `Фото ${this._name}`;
     this._nameElement.textContent = this._name;
     this._setEventListener();
     return this._cloneElement;
