@@ -1,11 +1,9 @@
-import './pages/index.css';
+import './index.css';
 
 import {
   initialCards,
   profileEditButtonElement,
   profileAddButtonElement,
-  formProfileElement,
-  formAddElement,
   cardTemplate,
   popupProfileSelector,
   popupAddSelector,
@@ -13,24 +11,26 @@ import {
   elementSelector,
   info,
   validationConfig
-} from './scripts/utils/constants.js';
+} from '../utils/constants.js';
 
-import Card from './scripts/components/Card.js';
-import FormValidator from './scripts/components/FormValidator.js';
-import PopupWithImage from './scripts/components/PopupWithImage.js';
-import Section from './scripts/components/Section.js';
-import UserInfo from './scripts/components/UserInfo.js';
-import PopupWithForm from './scripts/components/PopupWithForm.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
-
-
+const popupProfileElement = document.querySelector('.profile-popup');
+const formProfileElement = popupProfileElement.querySelector('.popup__form');
+const popupAddElement = document.querySelector('.add-popup');
+const formAddElement = popupAddElement.querySelector('.popup__form');
 
 const userInfo = new UserInfo(info);
 
 const popupImage = new PopupWithImage(popupImageSelector);
 popupImage.setEventListeners();
 
-//отрисовка карточек из массива
+//отрисовка карточек
 const section = new Section({
   items: initialCards, 
   renderer: (element) => {
@@ -40,21 +40,17 @@ const section = new Section({
 }, elementSelector)
 
 section.addArrayCards()
-
-//сабмит профиля
-const popupProfile = new PopupWithForm(popupProfileSelector, (evt) => {
-  evt.preventDefault();
-  userInfo.setUserInfo(popupProfile.getInputValues());
-  popupProfile.close();
-})
+ 
+const popupProfile = new PopupWithForm(popupProfileSelector, (data) => {
+  userInfo.setUserInfo(data);
+}) 
 
 popupProfile.setEventListeners()
 
 //сабмит для добавления карточек
-const popupAddCard = new PopupWithForm(popupAddSelector, (evt) => {
-  evt.preventDefault();
-  section.addItem(section.renderer(popupAddCard.getInputValues()))
-  popupAddCard.close();
+const popupAddCard = new PopupWithForm(popupAddSelector, (data) => {
+  // section.addItem(data);
+  section.addItem(section.renderer(data));
 });
 
 popupAddCard.setEventListeners();

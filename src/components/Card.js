@@ -17,6 +17,7 @@ class Card {
 
   _buttonDelete = () => {
     this._cloneElement.remove();
+    this.__cloneElement = null;
   }
 
   _openImagePopup = () => {

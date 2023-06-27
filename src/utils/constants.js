@@ -30,11 +30,6 @@ const initialCards = [
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
 const profileAddButtonElement = document.querySelector('.profile__add-button');
 
-const popupProfileElement = document.querySelector('.profile-popup');
-const formProfileElement = popupProfileElement.querySelector('.popup__form');
-const popupAddElement = document.querySelector('.add-popup');
-const formAddElement = popupAddElement.querySelector('.popup__form');
-
 //переменные селекторов
 const cardTemplate = '#cardTemplate';
 const popupProfileSelector = '.profile-popup';
@@ -61,8 +56,6 @@ export {
   initialCards,
   profileEditButtonElement,
   profileAddButtonElement,
-  formProfileElement,
-  formAddElement,
   cardTemplate,
   popupProfileSelector,
   popupAddSelector,
