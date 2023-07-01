@@ -40,9 +40,11 @@ const elementSelector = '.elements__container';
 const popupAvatarSelector = '.popup-avatar';
 const popupDeleteSelector = '.popup-delete';
 
+
 const info = {
   profileNameSelector: '.profile__title',
-  profileJobSelector: '.profile__subtitle'
+  profileJobSelector: '.profile__subtitle',
+  profileAvatarSelector: '.profile__avatar'
 }
 
 //переменные для валидации
