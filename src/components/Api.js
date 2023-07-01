@@ -13,19 +13,19 @@ export default class Api {
         authorization: this._authorization
       }
     })
-      .then(this._checkReply)
+    .then(this._checkReply)
   }
 
   getInitialCards() {
     return fetch(`${this._url}/cards`, { 
-        headers: {
-          authorization: this._authorization
-        }
-      })
-      .then(this._checkReply)
-    }
+      headers: {
+        authorization: this._authorization
+      }
+    })
+    .then(this._checkReply)
+  }
 
-    setUserInfo(data){
+  setUserInfo(data){
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -34,10 +34,10 @@ export default class Api {
         about: data.occupation,
       })
     })
-      .then(this._checkReply)
-    }
+    .then(this._checkReply)
+  }
 
-    setAvatar(data){
+  setAvatar(data){
     return fetch(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
@@ -45,10 +45,10 @@ export default class Api {
         avatar: data.avatar,
       })
     })
-      .then(this._checkReply)
-    }
+    .then(this._checkReply)
+  }
     
-    addCard(data){
+  addCard(data){
     return fetch(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
@@ -57,6 +57,36 @@ export default class Api {
         link: data.link,
       })
     })
-      .then(this._checkReply)
-    }
+    .then(this._checkReply)
+  }
+
+  addLike(cardId){
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: {
+        authorization: this._authorization
+      }
+    })
+    .then(this._checkReply)
+  }
+
+  deleteLike(cardId){
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization
+      }
+    })
+    .then(this._checkReply)
+  }
+
+  deleteCard(cardId){
+    return fetch(`${this._url}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: {
+        authorization: this._authorization
+      }
+    })
+    .then(this._checkReply)
+  }
 }

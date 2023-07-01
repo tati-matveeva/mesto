@@ -1,7 +1,6 @@
 import './index.css';
 
 import {
-  initialCards,
   profileEditButtonElement,
   profileAddButtonElement,
   avatarButtonElement,
@@ -49,9 +48,15 @@ const api = new Api({
 
 //------------------------------------------------------------------------
 //сабмит для удаления карточки
-const popupDeleteCard = new PopupDeleteCard(popupDeleteSelector, (element) => {
-  element.removeCard();
-  popupDeleteCard.close();
+const popupDeleteCard = new PopupDeleteCard(popupDeleteSelector, ({ element, cardId}) => {
+  api.deleteCard(cardId)
+    .then(() => {
+      element.removeCard();
+      popupDeleteCard.close();
+    })
+    .catch((error) =>
+      console.error(`Ошибка при удалении карточки ${error}`))
+    .finally(() => popupDeleteCard.textButtonNew())
 })
 popupDeleteCard.setEventListeners();
 
@@ -59,7 +64,25 @@ popupDeleteCard.setEventListeners();
 //отрисовка карточек
 
 function createNewCard (element){
-  const card = new Card(element, cardTemplate, popupImage.open, popupDeleteCard.open);
+  const card = new Card(element, cardTemplate, popupImage.open, popupDeleteCard.open, (likeElement, cardId) => {
+    if (likeElement.classList.contains('elements__like-button_active')){
+      api.deleteLike(cardId)
+        .then(res => {
+          console.log(res);
+          card.toggleLike(res.likes);
+        })
+        .catch((error) =>
+          console.error(`Ошибка при удалении лайка ${error}`))
+    } else {
+      api.addLike(cardId)
+        .then(res => {
+          card.toggleLike(res.likes)
+      })
+        .catch((error) =>
+          console.error(`Ошибка при установке лайка ${error}`))
+    }
+  
+  });
   return card.createCard();
 }
 
@@ -67,17 +90,17 @@ const section = new Section((element) => {
   section.addItemAppend(createNewCard(element))
   }, elementSelector)
 
-// section.addArrayCards(initialCards)
  //------------------------------------------------------------------------
  //сабмит для профиля
 const popupProfile = new PopupWithForm(popupProfileSelector, (data) => {
   api.setUserInfo(data)
   .then(res => {
     userInfo.setUserInfo({ username: res.name, occupation: res.about, avatar: res.avatar })
+    popupProfile.close();
   })
-  .catch((error =>
-    console.error(`Ошибка при редактировании профиля ${error}`)))
-  .finally()
+  .catch((error) =>
+    console.error(`Ошибка при редактировании профиля ${error}`))
+  .finally(() => popupProfile.textButtonNew())
 }) 
 
 popupProfile.setEventListeners()
@@ -90,9 +113,9 @@ const popupAddCard = new PopupWithForm(popupAddSelector, (data) => {
     section.addItem(createNewCard(cardData))
     popupAddCard.close();
   })
-  .catch((error =>
-      console.error(`Ошибка при добавлении карточки ${error}`)))
-  .finally()
+  .catch((error) =>
+      console.error(`Ошибка при добавлении карточки ${error}`))
+  .finally(() => popupAddCard.textButtonNew())
 });
 
 popupAddCard.setEventListeners();
@@ -103,10 +126,11 @@ const popupAvatar = new PopupWithForm(popupAvatarSelector, (data) => {
   api.setAvatar(data)
     .then(res => {
       userInfo.setUserInfo({ username: res.name, occupation: res.about, avatar: res.avatar })
+      popupAvatar.close();
     })
-    .catch((error =>
-      console.error(`Ошибка при редактировании аватара ${error}`)))
-    .finally()
+    .catch((error) =>
+      console.error(`Ошибка при редактировании аватара ${error}`))
+    .finally(() => popupAvatar.textButtonNew())
 })
 
 avatarButtonElement.addEventListener('click', () =>{
@@ -151,6 +175,6 @@ Promise.all([api.getInfo(), api.getInitialCards()])
     userInfo.setUserInfo({ username: userData.name, occupation: userData.about, avatar: userData.avatar })
     section.addArrayCards(cardData);
   })
-  .catch((error =>
-    console.error(`Ошибка при загрузке данных страницы ${error}`)))
+  .catch((error) =>
+    console.error(`Ошибка при загрузке данных страницы ${error}`))
   .finally()
