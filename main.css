@@ -410,6 +410,45 @@ template {
     margin: 0;
   }
 }
+.profile__avatar-button{
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  height: 120px;
+  width: 120px;
+  position: relative;
+  margin: 3px 30px 0 0;
+  cursor: pointer;
+}
+
+.profile__avatar-button::before{
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url(a1892ea72cb87c8fc3aa.svg);
+  background-size: 26px 26px;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+}
+
+.profile__avatar-button:hover::before{
+ opacity: 0.8;
+ transition: opacity .3s ease-in-out;
+}
+
+@media screen and (max-width: 787px){
+  .profile__avatar-button {
+    padding-bottom: 26px;
+    padding-right: 0;
+  }
+}
 .profile__info{
   max-width: 336px;
 }
@@ -703,7 +742,7 @@ template {
   font-weight: 900;
   line-height: 29.05px;
   color: black;
-  margin: 0 0 34px;
+  margin: 0 0 48px;
 }
 
 @media screen and (max-width: 1024px){
@@ -713,6 +752,9 @@ template {
     font-size: 18px;
     line-height: 21.78px;
   }
+}
+.popup__title{
+  margin-bottom: 38px;
 }
 .popup__input {
   width: 358px;
