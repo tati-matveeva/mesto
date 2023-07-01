@@ -29,6 +29,7 @@ const initialCards = [
 
 const profileEditButtonElement = document.querySelector('.profile__edit-button');
 const profileAddButtonElement = document.querySelector('.profile__add-button');
+const avatarButtonElement = document.querySelector('.profile__avatar-button')
 
 //переменные селекторов
 const cardTemplate = '#cardTemplate';
@@ -36,6 +37,8 @@ const popupProfileSelector = '.profile-popup';
 const popupAddSelector = '.add-popup';
 const popupImageSelector = '.popup-image';
 const elementSelector = '.elements__container';
+const popupAvatarSelector = '.popup-avatar';
+const popupDeleteSelector = '.popup-delete';
 
 const info = {
   profileNameSelector: '.profile__title',
@@ -56,11 +59,14 @@ export {
   initialCards,
   profileEditButtonElement,
   profileAddButtonElement,
+  avatarButtonElement,
   cardTemplate,
   popupProfileSelector,
   popupAddSelector,
   popupImageSelector,
   elementSelector,
+  popupAvatarSelector,
+  popupDeleteSelector,
   info,
   validationConfig
 }

@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "description": "ПР4, ПР5, : Место",
   "main": "index.js",
-  "homepage": "http://tati-matveeva.github.io/mesto",
+  "homepage": "http://tati-matveeva.github.io/mesto/",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d mesto"
+    "deploy": "gh-pages -d dist"
   },
   "author": "Tati Matveeva",
   "license": "ISC",

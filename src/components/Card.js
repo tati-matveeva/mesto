@@ -1,10 +1,11 @@
 class Card {
-  constructor(cardData, cardTemplate, openCardPopup){
+  constructor(cardData, cardTemplate, openCardPopup, openDeletePopup){
     this._cardData = cardData;
     this._link = cardData.link;
     this._name = cardData.title;
     this._cardTemplate = cardTemplate;
     this._openCardPopup = openCardPopup;
+    this._openDeletePopup = openDeletePopup;
   }
 
   _getClone(){
@@ -16,8 +17,7 @@ class Card {
   }
 
   _buttonDelete = () => {
-    this._cloneElement.remove();
-    this.__cloneElement = null;
+    this._openDeletePopup(this)
   }
 
   _openImagePopup = () => {
@@ -28,6 +28,11 @@ class Card {
     this._likeElement.addEventListener('click', this._buttonLike);
     this._deleteElement.addEventListener('click', this._buttonDelete);
     this._imageElement.addEventListener('click', this._openImagePopup);
+  }
+
+  removeCard(){
+    this._cloneElement.remove();
+    this._cloneElement = null;
   }
 
   createCard(){
