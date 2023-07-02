@@ -21,7 +21,7 @@ class Card {
   }
 
   _buttonLike = () => {
-    this._pressedLike(this._likeElement, this._cardId);
+    this._pressedLike(this.checkLike.bind(this), this._cardId);
   }
 
   _buttonDelete = () => {
@@ -42,11 +42,11 @@ class Card {
     this._myId === this._ownerId ?  this._deleteElement.visibility = 'visible' : this._deleteElement.remove();
   }
 
-  _checkLike(){
+  checkLike(){
     this._likes.forEach(item => {
       if (item._id === this._myId) {
         this._likeElement.classList.add('elements__like-button_active');
-        return
+        return true
       }
     })
     this._likeCounter.textContent = this._likesLength
@@ -66,7 +66,7 @@ class Card {
     this._imageElement.src = this._link;
     this._imageElement.alt = `Фото ${this._name}`;
     this._nameElement.textContent = this._name;
-    this._checkLike();
+    this.checkLike();
     this._setEventListener();
     this._compareId();
     return this._cloneElement;

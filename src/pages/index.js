@@ -64,11 +64,10 @@ popupDeleteCard.setEventListeners();
 //отрисовка карточек
 
 function createNewCard (element){
-  const card = new Card(element, cardTemplate, popupImage.open, popupDeleteCard.open, (likeElement, cardId) => {
-    if (likeElement.classList.contains('elements__like-button_active')){
+  const card = new Card(element, cardTemplate, popupImage.open, popupDeleteCard.open, (checkLike, cardId) => {
+    if (checkLike()) {
       api.deleteLike(cardId)
         .then(res => {
-          console.log(res);
           card.toggleLike(res.likes);
         })
         .catch((error) =>
@@ -107,16 +106,16 @@ popupProfile.setEventListeners()
 
 //сабмит для добавления карточек
 const popupAddCard = new PopupWithForm(popupAddSelector, (data) => {
-  Promise.all([api.getInfo(), api.addCard(data)])
-  .then(([userData, cardData]) => {
-    cardData.myId = userData._id;
-    section.addItem(createNewCard(cardData))
+  api.addCard(data)
+  .then((res) => {
+    section.addItem(createNewCard(res));
     popupAddCard.close();
   })
   .catch((error) =>
-      console.error(`Ошибка при добавлении карточки ${error}`))
+    console.error(`Ошибка при добавлении карточки ${error}`))
   .finally(() => popupAddCard.textButtonNew())
 });
+
 
 popupAddCard.setEventListeners();
 
@@ -149,6 +148,7 @@ formProfileValidation.enableValidation();
 const formAddElementValidation = new FormValidator(validationConfig, formAddElement);
 formAddElementValidation.enableValidation();
 
+//FormValidator для formAvatarElement и запуск валидации
 const formAvatarValidation = new FormValidator(validationConfig, formAvatarElement);
 formAvatarValidation.enableValidation();
 
@@ -175,6 +175,7 @@ Promise.all([api.getInfo(), api.getInitialCards()])
     userInfo.setUserInfo({ username: userData.name, occupation: userData.about, avatar: userData.avatar })
     section.addArrayCards(cardData);
   })
-  .catch((error) =>
-    console.error(`Ошибка при загрузке данных страницы ${error}`))
+  .catch((error) => {
+    console.error(`Ошибка при загрузке данных страницы ${error}`);
+  })
   .finally()
