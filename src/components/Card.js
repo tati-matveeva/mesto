@@ -1,9 +1,9 @@
 class Card {
-  constructor(cardData, cardTemplate, openCardPopup, openDeletePopup, pressedLike){
+  constructor(cardData, cardTemplate, openCardPopup, openDeletePopup, myId, pressedLike){
     this._cardData = cardData;
     this._link = cardData.link;
     this._name = cardData.name;
-    this._myId = cardData.myId;
+    this._myId = myId;
     this._ownerId = cardData.owner._id;
     this._cardId = cardData._id;
     this._likes = cardData.likes;
@@ -21,7 +21,8 @@ class Card {
   }
 
   _buttonLike = () => {
-    this._pressedLike(this.checkLike.bind(this), this._cardId);
+    this._pressedLike(this._cardId, this.isLiked.bind(this));
+    console.log('нажали лайк')
   }
 
   _buttonDelete = () => {
@@ -30,6 +31,7 @@ class Card {
 
   _openImagePopup = () => {
     this._openCardPopup(this._cardData);
+    
   }
 
   _setEventListener(){
@@ -39,15 +41,20 @@ class Card {
   }
 
   _compareId(){
+    console.log(this._myId)
+    console.log(this._ownerId)
     this._myId === this._ownerId ?  this._deleteElement.visibility = 'visible' : this._deleteElement.remove();
   }
 
   checkLike(){
     this._likes.forEach(item => {
+    console.log(this._myId)
       if (item._id === this._myId) {
-        this._likeElement.classList.add('elements__like-button_active');
-        return true
+        this._likeElement.classList.add('elements__like-button_active');        
+      } else {
+        this._likeElement.classList.remove('elements__like-button_active');      
       }
+      
     })
     this._likeCounter.textContent = this._likesLength
   }
@@ -70,6 +77,15 @@ class Card {
     this._setEventListener();
     this._compareId();
     return this._cloneElement;
+  }
+
+  isLiked(){
+    console.log(this._likeElement)
+    if (this._likeElement.classList.contains('elements__like-button_active')) {
+      return true
+    } else {
+      return false
+    }
   }
 }
 

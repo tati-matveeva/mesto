@@ -64,17 +64,23 @@ popupDeleteCard.setEventListeners();
 //отрисовка карточек
 
 function createNewCard (element){
-  const card = new Card(element, cardTemplate, popupImage.open, popupDeleteCard.open, (checkLike, cardId) => {
-    if (checkLike()) {
+  console.log(element)
+  const card = new Card(element, cardTemplate, popupImage.open, popupDeleteCard.open, userInfo.getId(),  (cardId, isLiked) => {
+    if (isLiked()) {
+      console.log('удалить')
+
       api.deleteLike(cardId)
         .then(res => {
           card.toggleLike(res.likes);
+          console.log(res.likes)
         })
         .catch((error) =>
           console.error(`Ошибка при удалении лайка ${error}`))
     } else {
+      console.log('поставить')
       api.addLike(cardId)
         .then(res => {
+          console.log(res)
           card.toggleLike(res.likes)
       })
         .catch((error) =>
@@ -106,6 +112,7 @@ popupProfile.setEventListeners()
 
 //сабмит для добавления карточек
 const popupAddCard = new PopupWithForm(popupAddSelector, (data) => {
+  
   api.addCard(data)
   .then((res) => {
     section.addItem(createNewCard(res));
@@ -173,6 +180,7 @@ Promise.all([api.getInfo(), api.getInitialCards()])
   .then(([userData, cardData]) => {
     cardData.forEach(element => element.myId = userData._id)
     userInfo.setUserInfo({ username: userData.name, occupation: userData.about, avatar: userData.avatar })
+    userInfo.setId(userData._id);
     section.addArrayCards(cardData);
   })
   .catch((error) => {
